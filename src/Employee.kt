@@ -16,4 +16,36 @@ class Employee(
     val yearsOfExperience: Int
         get() = _yearsOfExperience
 
+    fun setSalary(newSalary: Int) {
+        if (newSalary < 0) {
+            println("Предупреждение: Зарплата не может быть отрицательной! Значение не изменено.")
+        } else {
+            _salary = newSalary
+            println("Зарплата обновлена: $_salary")
+        }
+    }
+    fun setYearsOfExperience(newYears: Int) {
+        _yearsOfExperience = when {
+            newYears < 0 -> {
+                println("Предупреждение: Опыт не может быть отрицательным! Установлено значение 0.")
+                0
+            }
+            newYears > 50 -> {
+                println("Предупреждение: Максимальный опыт - 50 лет! Установлено значение 50.")
+                50
+            }
+            else -> {
+                println("Опыт обновлен: $newYears лет")
+                newYears
+            }
+        }
+    }
+    fun getInfo(): String {
+        return """
+            |Сотрудник: $_fullName
+            |Должность: $_position
+            |Зарплата: $_salary
+            |Опыт: $_yearsOfExperience лет
+        """.trimMargin()
+    }
 }
