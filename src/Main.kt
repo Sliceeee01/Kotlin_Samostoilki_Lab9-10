@@ -33,12 +33,24 @@
 //    println("   Копия с изменением приоритета: $task1HighPriority")
 //    println("   Копия с отметкой о выполнении: $task1Completed")
 //}
-fun testDepartments() {
-    println("\n=== Демонстрация абстрактных классов ===\n")
+//fun testDepartments() {
+//    println("\n=== Демонстрация абстрактных классов ===\n")
+//
+//    val devDept = DevelopmentDepartment()
+//    val testDept = TestingDepartment()
+//
+//    devDept.printDepartmentGoal()
+//    testDept.printDepartmentGoal()
+//}
+fun main() {
+    val reports: List<ReportGenerator> = listOf(
+        Employee("Мещеряков Тимофей", "Разработчик", 100000, 5),
+        Employee("Богданов ИВАН", "Красавелла", 8000000, 30),
+        DevDepartment(),
+        TestDepartment()
+    )
 
-    val devDept = DevelopmentDepartment()
-    val testDept = TestingDepartment()
-
-    devDept.printDepartmentGoal()
-    testDept.printDepartmentGoal()
+    for (report in reports) {
+        println(report.generateReport())
+    }
 }
