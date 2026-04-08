@@ -42,15 +42,36 @@
 //    devDept.printDepartmentGoal()
 //    testDept.printDepartmentGoal()
 //}
+//fun main() {
+//    val reports: List<ReportGenerator> = listOf(
+//        Employee("Мещеряков Тимофей", "Разработчик", 100000, 5),
+//        Employee("Богданов ИВАН", "Красавелла", 8000000, 30),
+//        DevDepartment(),
+//        TestDepartment()
+//    )
+//
+//    for (report in reports) {
+//        println(report.generateReport())
+//    }
+//}
 fun main() {
-    val reports: List<ReportGenerator> = listOf(
-        Employee("Мещеряков Тимофей", "Разработчик", 100000, 5),
-        Employee("Богданов ИВАН", "Красавелла", 8000000, 30),
-        DevDepartment(),
-        TestDepartment()
-    )
+    // Создаем сотрудника
+    val employee = Employee("Сидоров Алексей", "Разработчик", 120000, 4)
 
-    for (report in reports) {
-        println(report.generateReport())
-    }
+    // Создаем задачи
+    val task1 = Task("Исправить баг", "Починить кнопку входа", Priority.HIGH)
+    val task2 = Task("Написать тесты", "Добавить unit-тесты", Priority.MEDIUM)
+
+    println("=== Назначение задач ===")
+    employee.assignTask(task1)
+    employee.assignTask(task2)  // Ошибка - уже занят
+
+    println("\n=== Выполнение задачи ===")
+    employee.completeTask()
+
+    println("\n=== Назначение новой задачи ===")
+    employee.assignTask(task2)
+
+    println("\n=== Итоговый отчет ===")
+    println(employee.generateReport())
 }

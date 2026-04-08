@@ -19,10 +19,61 @@ class Employee(
             field = if (value > 50) 50 else if (value < 0) 0 else value
         }
 
+    private var currentTask: Task? = null
+
+    fun assignTask(task: Task) {
+        if (currentTask != null && currentTask?.isCompleted == false) {
+            println("Ошибка: $fullName уже занят задачей '${currentTask?.title}'")
+        } else {
+            currentTask = task
+            println("$fullName получил задачу: ${task.title}")
+        }
+    }
+
+    fun completeTask() {
+        if (currentTask != null && currentTask?.isCompleted == false) {
+            currentTask = currentTask?.copy(isCompleted = true)
+            println("$fullName завершил задачу!")
+        } else {
+            println("У $fullName нет активной задачи")
+        }
+    }
+
     override fun generateReport(): String {
-        return "Отчет: $fullName | $position | $salary руб | опыт $yearsOfExperience лет"
+        val taskStatus = if (currentTask != null) {
+            " | Задача: ${currentTask?.title} (${if (currentTask?.isCompleted == true) "выполнена" else "в работе"})"
+        } else {
+            " | Задач нет"
+        }
+        return "Отчет: $fullName | $position | $salary руб | опыт $yearsOfExperience лет$taskStatus"
     }
 }
+//class Employee(
+//    val fullName: String,
+//    val position: String,
+//    salary: Int,
+//    yearsOfExperience: Int
+//) : ReportGenerator {
+//
+//    var salary = salary
+//        set(value) {
+//            if (value < 0) {
+//                println("Ошибка: зарплата не может быть отрицательной")
+//            } else {
+//                field = value
+//            }
+//        }
+//
+//    var yearsOfExperience = yearsOfExperience
+//        set(value) {
+//            field = if (value > 50) 50 else if (value < 0) 0 else value
+//        }
+//
+//    override fun generateReport(): String {
+//        return "Отчет: $fullName | $position | $salary руб | опыт $yearsOfExperience лет"
+//    }
+//}
+//
 
 
 //class Employee(
